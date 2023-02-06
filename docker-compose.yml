@@ -1,0 +1,51 @@
+version: '3'
+
+networks:
+  laravel:
+
+services:
+  apache:
+    build:
+      context: ./apache
+      dockerfile: Dockerfile
+    container_name: apache
+    ports:
+      - "8090:80"
+    volumes:
+      - ./laravel-realworld-example-app:/var/www/html/laravel-realworld-example-app
+      - ./apache/laravel.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - laravel
+
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./secrets:/secrets
+      - ./laravel-realworld-example-app:/laravel-realworld-example-app
+    environment:
+      SERVICE_TAGS: dev-env
+    networks:
+      - laravel
+
+  php:
+    build:
+      context: ./php_composer
+      dockerfile: Dockerfile
+    container_name: php
+    tty: true
+    volumes:
+      - ./laravel-realworld-example-app/:/laravel-realworld-example-app/
+    working_dir: /laravel-realworld-example-app
+    networks:
+      - laravel
+    depends_on:
+      mysql:
+        condition: service_healthy
