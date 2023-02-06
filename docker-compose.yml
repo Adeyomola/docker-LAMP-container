@@ -16,6 +16,9 @@ services:
     volumes:
       - ./src:/var/www/html/app
       - ./apache/app.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./logs/apache:/var/log/apache2/access.log
+      - ./logs/apache:/var/log/apache2/error.log
+      - ./logs/apache:/var/log/apache2/other_vhosts_access.log
     depends_on:
       php:
         condition: service_completed_successfully
@@ -32,6 +35,10 @@ services:
     volumes:
       - ./secrets:/secrets
       - ./src:/app
+      - ./logs/mysql:/var/log/mysqld.log
+      - ./data:/var/lib/mysql
+    logging:
+      driver: json-file
     environment:
       SERVICE_TAGS: dev-env
     networks:
@@ -46,6 +53,9 @@ services:
       - ./src:/app
       - ./secrets:/secrets
       - ./edit_env.sh:/usr/local/bin/edit_env.sh
+      - ./logs/php:/var/log/php.log
+    logging:
+      driver: json-file
     working_dir: /app
     networks:
       - laravel
