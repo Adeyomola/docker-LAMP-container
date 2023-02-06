@@ -11,12 +11,14 @@ services:
     container_name: apache
     ports:
       - "8090:80"
+    environment:
+      TZ: UTC+1
     volumes:
-      - ./laravel-realworld-example-app:/var/www/html/laravel-realworld-example-app
-      - ./apache/laravel.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./src:/var/www/html/app
+      - ./apache/app.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
-      - php
-      - mysql
+      php:
+        condition: service_completed_successfully
     networks:
       - laravel
 
@@ -29,7 +31,7 @@ services:
     tty: true
     volumes:
       - ./secrets:/secrets
-      - ./laravel-realworld-example-app:/laravel-realworld-example-app
+      - ./src:/app
     environment:
       SERVICE_TAGS: dev-env
     networks:
@@ -40,10 +42,11 @@ services:
       context: ./php_composer
       dockerfile: Dockerfile
     container_name: php
-    tty: true
     volumes:
-      - ./laravel-realworld-example-app/:/laravel-realworld-example-app/
-    working_dir: /laravel-realworld-example-app
+      - ./src:/app
+      - ./secrets:/secrets
+      - ./edit_env.sh:/usr/local/bin/edit_env.sh
+    working_dir: /app
     networks:
       - laravel
     depends_on:
