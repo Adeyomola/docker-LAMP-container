@@ -52,7 +52,7 @@ services:
     volumes:
       - ./src:/app
       - ./secrets:/secrets
-      - ./edit_env.sh:/usr/local/bin/edit_env.sh
+      - ./scripts/edit_env.sh:/usr/local/bin/edit_env.sh
       - ./logs/php:/var/log/php.log
     logging:
       driver: json-file
