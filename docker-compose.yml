@@ -4,26 +4,29 @@ networks:
   laravel:
 
 services:
-  apache:
+  app:
     build:
-      context: ./apache
+      context: .
       dockerfile: Dockerfile
-    container_name: apache
+    container_name: app
+    volumes:
+      - ./secrets:/secrets
+      - ./scripts/edit_env.sh:/usr/local/bin/edit_env.sh
+      - ./app.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./logs/apache:/var/log/apache2/access.log
+      - ./logs/apache:/var/log/apache2/error.log
+      - ./logs/apache:/var/log/apache2/other_vhosts_access.log
+      - ./logs/php:/var/log/php.log
+    working_dir: /var/www/html/app
     ports:
       - "8090:80"
     environment:
       TZ: UTC+1
-    volumes:
-      - ./src:/var/www/html/app
-      - ./apache/app.conf:/etc/apache2/sites-enabled/000-default.conf
-      - ./logs/apache:/var/log/apache2/access.log
-      - ./logs/apache:/var/log/apache2/error.log
-      - ./logs/apache:/var/log/apache2/other_vhosts_access.log
-    depends_on:
-      php:
-        condition: service_completed_successfully
     networks:
       - laravel
+    depends_on:
+      mysql:
+        condition: service_healthy
 
   mysql:
     build:
@@ -38,28 +41,7 @@ services:
       - ./logs/mysql:/var/log/mysqld.log
       - ./logs/mysql:/root/.mysqlsh/.mysqlsh.log
       - ./data:/var/lib/mysql
-    logging:
-      driver: json-file
     environment:
       SERVICE_TAGS: dev-env
     networks:
       - laravel
-
-  php:
-    build:
-      context: ./php_composer
-      dockerfile: Dockerfile
-    container_name: php
-    volumes:
-      - ./src:/app
-      - ./secrets:/secrets
-      - ./scripts/edit_env.sh:/usr/local/bin/edit_env.sh
-      - ./logs/php:/var/log/php.log
-    logging:
-      driver: json-file
-    working_dir: /app
-    networks:
-      - laravel
-    depends_on:
-      mysql:
-        condition: service_healthy
