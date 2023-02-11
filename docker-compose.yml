@@ -40,7 +40,7 @@ services:
       - ./src:/app
       - ./logs/mysql:/var/log/mysqld.log
       - ./logs/mysql:/root/.mysqlsh/.mysqlsh.log
-      - ./logs/mysql:/var/lib/mysql/*.err
+      - ./logs/mysql:/var/lib/mysql/3e7be2bc4e73.err
       - ./data:/var/lib/mysql
     environment:
       SERVICE_TAGS: dev-env
