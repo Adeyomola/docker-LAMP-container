@@ -1,10 +1,10 @@
 ## HOW TO USE THIS COMPOSE FILE:
 * After cloning the repo locally, create a directory named secrets in the local repo. Then create the following files:
 ```mkdir secrets && cd secrets && touch mysql_user mysql_db mysql_password mysql_root```
-* In the `mysql_user` file, enter your db username.
-* In the `mysql_db` file, enter the name of the database.
-* In the `mysql_password` file, enter your user password.
-* In the `mysql_root` file, enter your root password.
+* In the `mysql_user` file, enter your db username. `echo username > mysql_user`
+* In the `mysql_db` file, enter the name of the database. `echo database > mysql_db`
+* In the `mysql_password` file, enter your user password.  `echo password > mysql_password`
+* In the `mysql_root` file, enter your root password.  `echo rootpassword > mysql_root`
 
 **NOTE: Docker secrets is more appropriate for storing secrets. The method above is merely illustrative.** 
 
