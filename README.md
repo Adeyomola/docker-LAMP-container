@@ -13,7 +13,9 @@ echo username > mysql_user && echo database > mysql_db && echo password > mysql_
 **NOTE: Docker secrets is more appropriate for storing secrets. The method above is merely illustrative.** 
 
 Once your secrets are ready, run:
-```docker compose build && docker compose up -d```
+~~~~
+docker compose build && docker compose up -d
+~~~~
 
 The web server listen's on port 80 and forwards to the docker host's port 8090. So, to test the app, go to:
 `http://url:8090`
