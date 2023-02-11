@@ -6,6 +6,8 @@
 * In the `mysql_password` file, enter your user password.  `echo password > mysql_password`
 * In the `mysql_root` file, enter your root password.  `echo rootpassword > mysql_root`
 
+`echo username > mysql_user && echo database > mysql_db && echo password > mysql_password && echo rootpassword > mysql_root`
+
 **NOTE: Docker secrets is more appropriate for storing secrets. The method above is merely illustrative.** 
 
 Once your secrets are ready, run:
