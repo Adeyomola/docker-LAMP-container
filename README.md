@@ -1,6 +1,8 @@
 ## HOW TO USE THIS COMPOSE FILE:
 * After cloning the repo locally, create a directory named secrets in the local repo. Then create the following files:
-```mkdir secrets && cd secrets && touch mysql_user mysql_db mysql_password mysql_root```
+~~~~
+mkdir secrets && cd secrets && touch mysql_user mysql_db mysql_password mysql_root
+~~~~
 * In the `mysql_user` file, enter your db username. `echo username > mysql_user`
 * In the `mysql_db` file, enter the name of the database. `echo database > mysql_db`
 * In the `mysql_password` file, enter your user password.  `echo password > mysql_password`
