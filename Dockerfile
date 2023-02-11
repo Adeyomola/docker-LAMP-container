@@ -11,7 +11,6 @@ RUN ["/bin/bash", "-c", "composer create-project && env_editor.sh && rm -rf /sec
 
 FROM mariadb:10.9.5-jammy
 EXPOSE 80
-EXPOSE 3306
 COPY --from=php /app/ /var/www/html/app/
 COPY ./apache/app.conf /etc/apache2/sites-enabled/000-default.conf
 COPY ./secrets /secrets/

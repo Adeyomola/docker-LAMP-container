@@ -36,6 +36,7 @@ services:
       - ./secrets:/secrets
       - ./src:/app
       - ./logs/mysql:/var/log/mysqld.log
+      - ./logs/mysql:/root/.mysqlsh/.mysqlsh.log
       - ./data:/var/lib/mysql
     logging:
       driver: json-file
