@@ -13,10 +13,8 @@ services:
       - ./secrets:/secrets
       - ./scripts/edit_env.sh:/usr/local/bin/edit_env.sh
       - ./app.conf:/etc/apache2/sites-enabled/000-default.conf
-      - ./logs/apache:/var/log/apache2/access.log
-      - ./logs/apache:/var/log/apache2/error.log
-      - ./logs/apache:/var/log/apache2/other_vhosts_access.log
-      - ./logs/php:/var/log/php.log
+      - ./logs/apache/:/var/log/apache2/
+      - ./logs/php:/var/log/php/
     working_dir: /var/www/html/app
     ports:
       - "8090:80"
@@ -38,9 +36,8 @@ services:
     volumes:
       - ./secrets:/secrets
       - ./src:/app
-      - ./logs/mysql:/var/log/mysqld.log
+      - ./logs/mysql:/var/log/
       - ./logs/mysql:/root/.mysqlsh/.mysqlsh.log
-      - ./logs/mysql:/var/lib/mysql/3e7be2bc4e73.err
       - ./data:/var/lib/mysql
     environment:
       SERVICE_TAGS: dev-env

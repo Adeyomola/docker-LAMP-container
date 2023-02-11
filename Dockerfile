@@ -7,7 +7,7 @@ COPY ./scripts/env_editor.sh /usr/local/bin/
 COPY ./app.conf /etc/apache2/sites-enabled/000-default.conf
 
 ENV webroot=/var/www/html/app
-ENV phplog=/var/log/php.log
+ENV phplog=/var/log/php/php.log
 
 ARG repo_url=https://github.com/f1amy/laravel-realworld-example-app.git
 ARG download_composer=https://getcomposer.org/download/2.4.4/composer.phar
@@ -21,7 +21,7 @@ RUN ["/bin/bash", "-c", "apt update -y && apt install git wget zlib1g-dev libzip
 && echo 'error_log = $phplog' >> /usr/local/etc/php/php.ini-development \
 && echo 'error_log = $phplog' >> /usr/local/etc/php/php.ini-production \
 && echo 'ServerName 127.0.0.1' >> /etc/apache2/apache2.conf \
-&& a2enmod rewrite && touch $phplog && chown www-data:www-data $phplog"]
+&& a2enmod rewrite && mkdir /var/log/php && touch $phplog && chown www-data:www-data $phplog"]
 
 # install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql mysqli bcmath zip gd
