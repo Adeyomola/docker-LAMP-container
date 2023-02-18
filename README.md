@@ -1,5 +1,5 @@
 ## HOW TO USE THIS COMPOSE FILE:
-* After cloning the repo locally, create a directory named secrets in the local repo. Then create the following files:
+* After cloning the repo locally, create a directory named .secrets in the local repo. Then create the following files:
 ~~~~
 mkdir .secrets && cd .secrets && touch mysql_user mysql_db mysql_password mysql_root
 ~~~~
