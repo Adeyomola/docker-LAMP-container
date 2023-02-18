@@ -8,9 +8,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      network: host
     container_name: app
     volumes:
-      - ./secrets:/secrets
+      - ./.secrets:/.secrets
       - ./scripts/edit_env.sh:/usr/local/bin/edit_env.sh
       - ./app.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./logs/apache/:/var/log/apache2/
@@ -34,7 +35,7 @@ services:
     restart: unless-stopped
     tty: true
     volumes:
-      - ./secrets:/secrets
+      - ./.secrets:/.secrets
       - ./src:/app
       - ./logs/mysql:/var/log/
       - ./logs/mysql:/root/.mysqlsh/.mysqlsh.log
