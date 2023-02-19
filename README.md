@@ -4,7 +4,7 @@
 cp .env.example .env
 ~~~~
 * Open the `.env` file and enter the appropriate database credentials.
-Once your `.env` file is ready, run:
+* Then when your `.env` file is ready, run:
 ~~~~
 docker compose build && docker compose up -d
 ~~~~
