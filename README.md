@@ -1,5 +1,5 @@
 ## HOW TO USE THIS COMPOSE FILE:
-* After cloning the repo locally, `cd` into the local repo, make a copy of the `.env.example` file and name it `.env`.\
+* After cloning the repo locally, `cd` into the local repo, make a copy of the `.env.example` file and name it `.env`.
 ~~~~
 cp .env.example .env
 ~~~~
