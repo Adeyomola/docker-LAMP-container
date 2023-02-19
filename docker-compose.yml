@@ -11,8 +11,6 @@ services:
       network: host
     container_name: app
     volumes:
-      - ./.secrets:/.secrets
-      - ./scripts/edit_env.sh:/usr/local/bin/edit_env.sh
       - ./app.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./logs/apache/:/var/log/apache2/
       - ./logs/php:/var/log/php/
@@ -21,6 +19,11 @@ services:
       - "8090:80"
     environment:
       TZ: UTC+1
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
     networks:
       - laravel
     depends_on:
@@ -34,13 +37,20 @@ services:
     container_name: mysql
     restart: unless-stopped
     tty: true
+#    healthcheck:
+#      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+#      retries: 3
+#      timeout: 60s
     volumes:
-      - ./.secrets:/.secrets
-      - ./src:/app
-      - ./logs/mysql:/var/log/
+      - ./logs/mysql:/var/log
+      - ./logs/mysql:/var/lib/mysql/mysql
       - ./logs/mysql:/root/.mysqlsh/.mysqlsh.log
       - ./data:/var/lib/mysql
     environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD} 
       SERVICE_TAGS: dev-env
     networks:
       - laravel
