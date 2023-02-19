@@ -1,5 +1,5 @@
 ## HOW TO USE THIS COMPOSE FILE:
-* After cloning the repo locally, `cd` into the local repo and make a copy of the `.env.example` file and name it `.env`.
+* After cloning the repo locally, `cd` into the local repo and make a copy of the `.env.example` file and name it `.env`.\
 ```cp .env.example .env```
 * Open the `.env` file and enter the appropriate database credentials.
 Once your `.env` file is ready, run:
