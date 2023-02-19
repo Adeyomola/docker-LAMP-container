@@ -1,6 +1,7 @@
 ## HOW TO USE THIS COMPOSE FILE:
-* After cloning the repo locally, open the `.env.example` file and enter the appropriate database credentials.
-* Make a copy of the `.env.example` file; the copy should be named .env `cp .env.example .env`
+* After cloning the repo locally, make a copy of the `.env.example` file. The copy should be named `.env`.
+```cp .env.example .env```
+* Open the `.env` file and enter the appropriate database credentials.
 Once your `.env` file is ready, run:
 ~~~~
 docker compose build && docker compose up -d

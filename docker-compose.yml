@@ -45,7 +45,7 @@ services:
       - ./logs/mysql:/var/log
       - ./logs/mysql:/var/lib/mysql/mysql
       - ./logs/mysql:/root/.mysqlsh/.mysqlsh.log
-      - ./data:/var/lib/mysql
+#      - ./data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
